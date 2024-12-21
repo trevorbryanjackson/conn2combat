@@ -30,6 +30,11 @@ def parse_arguments():
         print(f"Saving output to: {parsed_args.output_directory}")
     if parsed_args.rois:
         print(f"Processing the following ROIs: {', '.join(parsed_args.rois)}")
+    if parsed_args.limit:
+        if len(parsed_args.rois) > 2: 
+            print(f"Limiting output to ROI-to-ROI data.")
+        else:
+            print(f"No ROIs specified. Ignoring --limit flag.")
     return parsed_args
 
 ######## CODE ########
