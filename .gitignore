@@ -10,3 +10,6 @@ conn2combat/__pycache__/__init__.cpython-311.pyc
 conn2combat.egg-info/requires.txt
 conn2combat/.DS_Store
 build/lib/conn2combat/firstlevelparser.py
+conn2combat.egg-info/entry_points.txt
+dist/conn2combat-0.2.0-py3-none-any.whl
+dist/conn2combat-0.2.0.tar.gz
