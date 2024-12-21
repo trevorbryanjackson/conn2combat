@@ -1,4 +1,4 @@
-# CONN First Level Extraction
+# conn2combat - Extract First Level Data From CONN For Use With COMBAT.
 
 This script is designed to parse .mat files generated from CONN first-level ROI-to_ROI analyses (https://web.conn-toolbox.org/resources) 
 and output them in a format that can be used by COMBAT (https://github.com/Jfortin1/ComBatHarmonization). 
@@ -53,7 +53,3 @@ combat2conn -d /path/to/conn_directory -o /path/to/output_dir -r ROI1 ROI2 ROI3
     ```
     python conn2combat.py -d /path/to/conn_directory -o /path/to/output_dir -r ROI1 ROI2 ROI3
     ```
-
-## License
-
-This project is licensed under the MIT License.
