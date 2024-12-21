@@ -33,7 +33,7 @@ def options():
     return options
 
 ######## CODE ########
-def main(data_dir, output_directory, rois, limit):
+def conn2combat(data_dir, output_directory, rois, limit):
     pattern = 'resultsROI_Subject*_Condition001.mat'
     files = os.path.join(data_dir, pattern)
     all_data = {}
@@ -84,7 +84,7 @@ def main(data_dir, output_directory, rois, limit):
     combined_df_with_header.to_csv(combined_output_file, header=False, index=False)
     print(f"Saved combined data: {combined_output_file}")
 
-if __name__ == "__main__":
+def main():
     options = options()
     if options.conn_directory:
         print(f"Using connection directory: {options.conn_directory}")
@@ -94,4 +94,8 @@ if __name__ == "__main__":
         print(f"Processing the following ROIs: {', '.join(options.rois)}")
     if options.limit:
         print(f"Limiting output to ROI-to-ROI data.")
-    main(options.conn_directory, options.output_directory, options.rois, options.limit)
+    conn2combat(options.conn_directory, options.output_directory, options.rois, options.limit)
+
+
+if __name__ == "__main__":
+    main()
