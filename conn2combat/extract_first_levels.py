@@ -1,12 +1,10 @@
-######## CODE ########
 import os
-import scipy.io as sio
-import numpy as np
-import pandas as pd
-import glob
 import sys
-import h5py
+import glob
 import argparse
+import subprocess
+import h5py
+import pandas as pd
 
 def options():
     parser = argparse.ArgumentParser(
@@ -22,20 +20,33 @@ def options():
                         python extract_for_combat.py -d /path/to/conn_directory -o /path/to/output_dir -r ROI1 ROI2 ROI3
                     """)
     parser.add_argument("-d", "--conn_directory", type=str, help="Path to the CONN analysis directory. Required.", required=True)
-    parser.add_argument("-o", "--output_dir", type=str, help="Path to the directory where the outputs will be saved. Default is the current directory.", default=".")
+    parser.add_argument("-o", "--output_directory", type=str, help="Path to the directory where the outputs will be saved. Default is the current directory.", default=".")
     parser.add_argument("-r", "--rois", type=str, nargs='*',  help="List of regions of interest (ROIs) to export. Default is all ROIs.")
     parser.add_argument("-l", "--limit", action="store_true",  help="Limits output to only ROI-to-ROI data (as opposed to ROIs-to-all including atlas and networks).")
     options = parser.parse_args()
     if options.conn_directory:
         print(f"Using connection directory: {options.conn_directory}")
-    if options.output_dir:
-        print(f"Saving output to: {options.output_dir}")
+    if options.output_directory:
+        print(f"Saving output to: {options.output_directory}")
     if options.rois:
         print(f"Processing the following ROIs: {', '.join(options.rois)}")
     return options
 
+def install_packages():
+    # Read the requirements.txt file and install the packages
+    with open('requirements.txt') as f:
+        required_packages = f.readlines()
+    
+    # Iterate through each package and install it
+    for package in required_packages:
+        package = package.strip()  # Remove leading/trailing whitespace
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+# Call the install function at the start of your script
+install_packages()
+
 ######## CODE ########
-def run(data_dir, output_dir, rois, limit):
+def run(data_dir, output_directory, rois, limit):
     pattern = 'resultsROI_Subject*_Condition001.mat'
     files = os.path.join(data_dir, pattern)
     all_data = {}
@@ -72,7 +83,7 @@ def run(data_dir, output_dir, rois, limit):
                         continue
                     data.append((f"{row_name}_{col_name}", Z[i, j]))
             df = pd.DataFrame(data, columns=["Name", "Score"])
-            output_file = os.path.join(output_dir, f"{os.path.basename(file).split('.')[0]}_correlation_data_filtered.csv")
+            output_file = os.path.join(output_directory, f"{os.path.basename(file).split('.')[0]}_correlation_data_filtered.csv")
             df.to_csv(output_file, index=False)
             print(f"Saved filtered data: {output_file}")
             subject_name = os.path.basename(file).split('_')[1] 
@@ -82,7 +93,7 @@ def run(data_dir, output_dir, rois, limit):
     combined_df.columns = list(all_data.keys())
     subject_row = pd.DataFrame([combined_df.columns], columns=combined_df.columns)
     combined_df_with_header = pd.concat([subject_row, combined_df], ignore_index=True)
-    combined_output_file = os.path.join(output_dir, "combat_correlation_data.csv")
+    combined_output_file = os.path.join(output_directory, "combat_correlation_data.csv")
     combined_df_with_header.to_csv(combined_output_file, header=False, index=False)
     print(f"Saved combined data: {combined_output_file}")
 
@@ -90,10 +101,10 @@ if __name__ == "__main__":
     options = options()
     if options.conn_directory:
         print(f"Using connection directory: {options.conn_directory}")
-    if options.output_dir:
-        print(f"Saving output to: {options.output_dir}")
+    if options.output_directory:
+        print(f"Saving output to: {options.output_directory}")
     if options.rois:
         print(f"Processing the following ROIs: {', '.join(options.rois)}")
     if options.limit:
         print(f"Limiting output to ROI-to-ROI data.")
-    run(options.conn_directory, options.output_dir, options.rois, options.limit)
+    run(options.conn_directory, options.output_directory, options.rois, options.limit)
