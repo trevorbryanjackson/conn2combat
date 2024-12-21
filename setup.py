@@ -1,14 +1,14 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='my-python-package',
+    name='conn2combat',
     version='0.1.0',
-    author='Your Name',
-    author_email='your.email@example.com',
+    author='T. Bryan Jackson',
+    author_email='trevorbryanjackson@gmail.com',
     description='A package for parsing .mat files from CONN first-level ROI-to-ROI analyses and preparing data for COMBAT.',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url='https://github.com/yourusername/my-python-package',
+    url='https://github.com/trevorbryanjackson/conn2combat',
     packages=find_packages(),
     install_requires=open('requirements.txt').read().splitlines(),
     classifiers=[

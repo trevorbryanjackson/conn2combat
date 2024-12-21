@@ -32,19 +32,6 @@ def options():
         print(f"Processing the following ROIs: {', '.join(options.rois)}")
     return options
 
-def install_packages():
-    # Read the requirements.txt file and install the packages
-    with open('requirements.txt') as f:
-        required_packages = f.readlines()
-    
-    # Iterate through each package and install it
-    for package in required_packages:
-        package = package.strip()  # Remove leading/trailing whitespace
-        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-
-# Call the install function at the start of your script
-install_packages()
-
 ######## CODE ########
 def run(data_dir, output_directory, rois, limit):
     pattern = 'resultsROI_Subject*_Condition001.mat'

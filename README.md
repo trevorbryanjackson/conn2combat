@@ -24,7 +24,8 @@ python extract_for_combat.py -d /path/to/conn_directory -o /path/to/output_dir -
 
 - Python 3.x (tested with python 3.11.11)
 
-## Installation
+## Installation from source 
+
 
 1. Clone the repository:
     ```

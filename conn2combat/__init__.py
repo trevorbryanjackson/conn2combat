@@ -1,4 +1,4 @@
-# FILE: /my-python-package/my-python-package/my_python_package/__init__.py
+# FILE: /conn2combat/conn2combat/__init__.py
 """
 my_python_package
 
