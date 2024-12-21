@@ -33,7 +33,7 @@ def options():
     return options
 
 ######## CODE ########
-def run(data_dir, output_directory, rois, limit):
+def main(data_dir, output_directory, rois, limit):
     pattern = 'resultsROI_Subject*_Condition001.mat'
     files = os.path.join(data_dir, pattern)
     all_data = {}
@@ -94,4 +94,4 @@ if __name__ == "__main__":
         print(f"Processing the following ROIs: {', '.join(options.rois)}")
     if options.limit:
         print(f"Limiting output to ROI-to-ROI data.")
-    run(options.conn_directory, options.output_directory, options.rois, options.limit)
+    main(options.conn_directory, options.output_directory, options.rois, options.limit)
