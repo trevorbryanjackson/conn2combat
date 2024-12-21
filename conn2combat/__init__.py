@@ -9,4 +9,4 @@ Modules:
 - extract_first_levels: Contains functions for extracting and processing ROI data.
 """
 
-from .extract_first_levels import extract  # Importing functions for easier access at the package level.
+from .conn2combat import extract  # Importing functions for easier access at the package level.
