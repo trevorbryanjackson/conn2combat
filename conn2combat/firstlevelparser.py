@@ -6,7 +6,7 @@ import subprocess
 import h5py
 import pandas as pd
 
-def options():
+def parse_arguments():
     parser = argparse.ArgumentParser(
     description="""
                     This script is designed to parse .mat files generated from CONN first-level ROI-to_ROI analyses (https://web.conn-toolbox.org/resources) 
@@ -23,14 +23,14 @@ def options():
     parser.add_argument("-o", "--output_directory", type=str, help="Path to the directory where the outputs will be saved. Default is the current directory.", default=".")
     parser.add_argument("-r", "--rois", type=str, nargs='*',  help="List of regions of interest (ROIs) to export. Default is all ROIs.")
     parser.add_argument("-l", "--limit", action="store_true",  help="Limits output to only ROI-to-ROI data (as opposed to ROIs-to-all including atlas and networks).")
-    options = parser.parse_args()
-    if options.conn_directory:
-        print(f"Using connection directory: {options.conn_directory}")
-    if options.output_directory:
-        print(f"Saving output to: {options.output_directory}")
-    if options.rois:
-        print(f"Processing the following ROIs: {', '.join(options.rois)}")
-    return options
+    parsed_args = parser.parse_args()
+    if parsed_args.conn_directory:
+        print(f"Using connection directory: {parsed_args.conn_directory}")
+    if parsed_args.output_directory:
+        print(f"Saving output to: {parsed_args.output_directory}")
+    if parsed_args.rois:
+        print(f"Processing the following ROIs: {', '.join(parsed_args.rois)}")
+    return parsed_args
 
 ######## CODE ########
 def conn2combat(data_dir, output_directory, rois, limit):
@@ -85,7 +85,7 @@ def conn2combat(data_dir, output_directory, rois, limit):
     print(f"Saved combined data: {combined_output_file}")
 
 def main():
-    options = options()
+    options = parse_arguments()
     if options.conn_directory:
         print(f"Using connection directory: {options.conn_directory}")
     if options.output_directory:
