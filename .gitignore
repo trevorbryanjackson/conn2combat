@@ -1,6 +1,5 @@
 conn2combat/__pycache__/*
-conn2combat/.DS_Store
+*.DS_Store
 build/*
 conn2combat.egg*
 dist/*
-
