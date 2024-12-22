@@ -73,6 +73,8 @@ def conn2combat(data_dir, output_directory, rois, limit):
                             continue
                     if row_name == col_name:
                         continue
+                    if (f"{col_name}_{row_name}", Z[j, i]) in data:
+                        continue                    
                     data.append((f"{row_name}_{col_name}", Z[i, j]))
             df = pd.DataFrame(data, columns=["Name", "Score"])
             output_file = os.path.join(output_directory, f"{os.path.basename(file).split('.')[0]}_correlation_data_filtered.csv")

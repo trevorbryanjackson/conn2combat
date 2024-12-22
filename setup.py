@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='conn2combat',
-    version='0.5.0',
+    version='1.0.0',
     author='T. Bryan Jackson',
     author_email='trevorbryanjackson@gmail.com',
     description='A package for parsing .mat files from CONN first-level ROI-to-ROI analyses and preparing data for COMBAT.',
